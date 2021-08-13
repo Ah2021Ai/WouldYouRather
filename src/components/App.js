@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Switch, Route} from "react-router-dom"
 import WithAuth from "../hoc/withAuth";
 import AddNewPoll from "./AddNewPoll";
@@ -9,16 +10,21 @@ import NavBar from "./NavBar";
 import Poll from "./Poll";
 
 function App() {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch({type: "users/usersFetch"})
+  }, [])
+
   return (
     <div>
       <NavBar />
       <Switch>
-        <Route exact path="/"
-          render={() => (
-            <WithAuth>
-              <Home />
-            </WithAuth>
-          )} />
+        <Route exact path="/">
+          <WithAuth>
+            <Home />
+          </WithAuth>
+        </Route>
         <Route path="/login">
           <Login />
         </Route>
