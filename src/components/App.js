@@ -21,33 +21,33 @@ function App() {
   return (
     <Fragment>
       <LoadingBar className="bg-blue-500 h-1 absolute	" />
-      <div>
-      <NavBar />
-      <Switch>
-        <Route exact path="/">
-          <WithAuth>
-            <Home />
-          </WithAuth>
-        </Route>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/questions/:QuestionId">
-          <WithAuth>
-            <Poll />
-          </WithAuth>
-        </Route>
-        <Route path="/add">
-          <WithAuth>
-            <AddNewPoll />
-          </WithAuth>
-        </Route>
-        <Route path="/leaderboard">
-          <WithAuth>
-            <LeaderBoard />
-          </WithAuth>
-        </Route>        
-      </Switch>
+      <div className="h-screen" >
+        <NavBar />
+        <Switch>
+          <Route exact path="/">
+            <WithAuth>
+              <Home />
+            </WithAuth>
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/questions/:QuestionId">
+            <WithAuth>
+              <Poll />
+            </WithAuth>
+          </Route>
+          <Route path="/add">
+            <WithAuth>
+              <AddNewPoll />
+            </WithAuth>
+          </Route>
+          <Route path="/leaderboard">
+            <WithAuth>
+              <LeaderBoard />
+            </WithAuth>
+          </Route>        
+        </Switch>
       </div>
     </Fragment>
   );

@@ -10,8 +10,8 @@ function NavBar() {
         history.push('/login')
     }
     return (
-        <div className="bg-red-50 w-screen">
-            <div className="flex bg-gray-300 justify-evenly">
+        <div className="w-4/5 mx-auto ">
+            <div className="flex bg-blue-100 rounded-md py-2 justify-evenly">
                 <Link to="/">Home</Link>
                 <Link to="/add">Add New Poll</Link>
                 <Link to="/leaderboard">Leaderboard</Link>

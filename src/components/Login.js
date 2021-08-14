@@ -7,8 +7,8 @@ const selectedUsers = (state) => Object.values(state.users)
 function Login() {
     const users = useSelector(selectedUsers)
     return (
-        <div className="flex justify-center">
-            <h1>Login as...</h1>
+        <div className="flex flex-col justify-center  items-center h-3/5">
+            <h1 className="text-3xl">Login as...</h1>
             {users.length !== 0 && <CheckList />
             }
         </div>
