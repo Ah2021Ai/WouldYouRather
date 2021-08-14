@@ -15,6 +15,8 @@ export default function pollsReducer(state = {}, action) {
                     }
                 }
             }
+        case "polls/emptyPolls":
+            return {}
         default:
             return state;
     }

@@ -6,11 +6,9 @@ export default function currentUserReducer(state = null, action) {
                 ...action.payload
                 
             }
-        case 'currentUser/logout':
-                return {
-                    ...state,
-                    currentUser: {}
-                }
+        case 'currentUser/logout': {
+            return null   
+        }
     
         default:
             return state;

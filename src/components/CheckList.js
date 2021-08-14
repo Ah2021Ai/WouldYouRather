@@ -15,10 +15,8 @@ export default function CheckList() {
     const [selected, setSelected] = useState(users[0])
 
     const handleLogin = (e) => {
-        console.log(e)
         e.preventDefault()
         dispatch({type: "currentUser/setCurrentUser", payload: selected})
-        dispatch({type: "polls/pollsFetch"})
         history.push("/")
     }
   return (

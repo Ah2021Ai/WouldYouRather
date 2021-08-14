@@ -3,13 +3,15 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 
 
 import createSagaMiddleware from "redux-saga";
+import { loadingBarMiddleware } from 'react-redux-loading-bar'
 
 import rootReducer from "./reducer";
 import rootSaga from "./rootSaga";
 const sagaMiddleware = createSagaMiddleware()
+const loadingBarMW = loadingBarMiddleware()
 
 const composedEnhancer = composeWithDevTools(
-    applyMiddleware(sagaMiddleware)
+    applyMiddleware(sagaMiddleware, loadingBarMW)
 )   
 
 const store = createStore(
