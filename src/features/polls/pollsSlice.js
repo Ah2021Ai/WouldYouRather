@@ -8,15 +8,26 @@ export default function pollsReducer(state = {}, action) {
         case 'polls/addNewPoll':
             return {
                 ...state,
-                polls: {
-                    ...state.polls,
-                    [action.payload.id]: {
+                [action.payload.id]: {
                         ...action.payload
+                    }
+                }
+        case 'polls/saveQuestionAnswer':
+            const {authedUser ,qid, answer} = action.payload
+            
+            return {
+                ...state,
+                [qid]: {
+                    ...state[qid],
+                    [answer]: {
+                        ...state[qid][answer],
+                        votes: state[qid][answer].votes.concat([authedUser])
                     }
                 }
             }
         case "polls/emptyPolls":
             return {}
+        
         default:
             return state;
     }

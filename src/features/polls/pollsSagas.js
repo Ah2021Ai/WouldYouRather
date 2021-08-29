@@ -1,19 +1,19 @@
 import { put, call, takeLatest, all } from "redux-saga/effects"
-import { getPolls } from "../../utils/api"
 import {showLoading, hideLoading} from "react-redux-loading-bar"
+import { handleFetchProducts } from "./pollsHelpers";
+import { saveQuestion, saveQuestionAnswer } from "../../utils/api";
 
 function* fetchPolls() {
-    let polls;
-    try {
-        yield put(showLoading())
-        polls = yield call(getPolls)
-        yield put({
-            type: 'polls/receivePolls',
-            payload: {polls: polls}
-        })
-    } finally {
-        yield put(hideLoading())
-    }
+    yield put(showLoading())
+    const polls = yield call(handleFetchProducts)
+    yield all([
+        put({
+        type: 'polls/receivePolls',
+        payload: {polls: polls}
+        }),
+        put(hideLoading())
+    ])
+    
 }
 
 function* watchFetchPolls() {
@@ -28,9 +28,65 @@ function* watchUserLogedOut() {
     yield takeLatest('polls/removePolls', removePolls)
 }
 
+function* addNewPoll(action) {
+    yield put(showLoading())
+    const newPoll = yield call(saveQuestion, action.payload)
+    yield all([
+        put({
+            type: 'polls/addNewPoll',
+            payload: newPoll,
+        }),
+        put({
+            type: "users/saveUserQuestion",
+            payload: newPoll
+        }),
+        put({
+            type: 'currentUser/saveCurrentUserQuestion',
+            payload: newPoll
+        }),
+        put(hideLoading())
+    ])
+}
+
+function* watchAddNewPoll() {
+    yield takeLatest('polls/addNewPollStart', addNewPoll)
+}
+
+function* saveAnswer(action) {
+    yield put(showLoading())
+    try {
+        yield call(saveQuestionAnswer, action.payload)
+        yield all([
+            put({
+                type: "polls/saveQuestionAnswer",
+                payload: action.payload
+            }),
+            put({
+                type: 'user/saveUserAnswer',
+                payload: action.payload
+            }),
+            put({
+                type: "currentUser/saveCurrentUserAnswer",
+                payload: action.payload
+            }),
+            put(hideLoading())
+        ])
+    } catch (error) {
+        
+    }
+    
+}
+
+function* watchSaveQuestionAnswerStart() {
+    yield takeLatest('polls/saveQuestionAnswerStart', saveAnswer)
+}
+
+
 export default function* pollsSagas() {
     yield all([
         call(watchFetchPolls),
-        call(watchUserLogedOut)
+        call(watchUserLogedOut),
+        call(watchAddNewPoll),
+        call(watchSaveQuestionAnswerStart)
     ])
 }

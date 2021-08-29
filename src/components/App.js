@@ -10,7 +10,11 @@ import Login from "./Login";
 import NavBar from "./NavBar";
 import Poll from "./Poll";
 import LoadingBar from "react-redux-loading-bar";
+import PollPage from "./PollPage";
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fas, faTrophy } from '@fortawesome/free-solid-svg-icons'
 
+library.add(fas, faTrophy)
 
 function App() {
     const dispatch = useDispatch()
@@ -19,9 +23,9 @@ function App() {
       dispatch({type: "users/usersFetch"})
     }, [])
   return (
-    <Fragment>
-      <LoadingBar className="bg-blue-500 h-1 absolute	" />
-      <div className="h-screen" >
+    <Fragment >
+      <LoadingBar className="bg-white h-1 absolute	" />
+      <div className="font-bold mx-auto min-h-screen">
         <NavBar />
         <Switch>
           <Route exact path="/">
@@ -34,7 +38,7 @@ function App() {
           </Route>
           <Route path="/questions/:QuestionId">
             <WithAuth>
-              <Poll />
+              <PollPage />
             </WithAuth>
           </Route>
           <Route path="/add">

@@ -17,6 +17,7 @@ export default function CheckList() {
     const handleLogin = (e) => {
         e.preventDefault()
         dispatch({type: "currentUser/setCurrentUser", payload: selected})
+        dispatch({type: "polls/pollsFetch"})
         history.push("/")
     }
   return (
@@ -44,7 +45,7 @@ export default function CheckList() {
                   <Listbox.Option
                     key={userIdx}
                     className={({ active }) =>
-                      `${active ? 'text-amber-900 bg-amber-100 bg-blue-100' : 'text-gray-900'}
+                      `${active ? 'text-amber-900 bg-amber-100 bg-blue-300' : 'text-gray-900'}
                             cursor-default select-none relative py-2 pl-10 pr-4`
                     }
                     value={user}
@@ -76,7 +77,7 @@ export default function CheckList() {
             </Transition>
           </div>
         </Listbox>
-        <button className="bg-blue-100 rounded-full w-full shadow-lg py-2" onClick={handleLogin}>Login</button>
+        <button className="bg-blue-300 rounded-full w-full shadow-lg py-2" onClick={handleLogin}>Login</button>
       </div>
     </Fragment>
   )

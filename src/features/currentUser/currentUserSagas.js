@@ -1,14 +1,10 @@
 import { call, put ,all, takeLatest } from "redux-saga/effects";
 
 function* setCurrentUser(action) {
-    try {
-        yield put({
-        type: 'currentUser/login',
-        payload: action.payload
-        })
-    } finally {
-        yield put({type: "polls/pollsFetch"})
-    }
+    yield put({
+    type: 'currentUser/login',
+    payload: action.payload
+    })
 }
 function* watchSetCurrentUser() {
     yield takeLatest('currentUser/setCurrentUser', setCurrentUser)
@@ -31,28 +27,3 @@ export default function* currentUserSagas() {
         call(watchLogoutUser)
     ])
 }
-
-// import {
-//     _getUsers,
-//     _getTweets,
-//     _saveLikeToggle,
-//     _saveTweet,
-//   } from './_DATA.js'
-  
-//   export function getInitialData () {
-//     return Promise.all([
-//       _getUsers(),
-//       _getTweets(),
-//     ]).then(([users, tweets]) => ({
-//       users,
-//       tweets,
-//     }))
-//   }
-  
-//   export function saveLikeToggle (info) {
-//     return _saveLikeToggle(info)
-//   }
-  
-//   export function saveTweet (info) {
-//     return _saveTweet(info)
-//   }
