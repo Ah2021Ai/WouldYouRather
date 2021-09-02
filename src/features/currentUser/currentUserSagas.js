@@ -1,11 +1,18 @@
 import { call, put ,all, takeLatest } from "redux-saga/effects";
 
 function* setCurrentUser(action) {
-    yield put({
-    type: 'currentUser/login',
-    payload: action.payload
-    })
-}
+    const {selected, cb} = action.payload
+    yield all([
+        put({
+            type: 'currentUser/login',
+            payload: selected
+        }),
+        put({
+            type: "polls/pollsFetch",
+            cb: cb
+        }),
+    ])} 
+    
 function* watchSetCurrentUser() {
     yield takeLatest('currentUser/setCurrentUser', setCurrentUser)
 }

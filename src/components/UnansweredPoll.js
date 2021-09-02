@@ -1,7 +1,6 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { RadioGroup } from '@headlessui/react'
-import { formatDate } from "../utils/helpers"
 import CheckIcon from "./CheckIcon";
 import { useHistory } from "react-router-dom";
 
@@ -20,9 +19,9 @@ function UnansweredPoll({data}) {
         try {
             dispatch({type: "polls/saveQuestionAnswerStart", payload})
         } catch (error) {   
-            console.log(error)
+            // console.log(error)
         } finally {
-            history.push("/")
+            history.push(`/questions/${qid}`)
             }
         }
     return (
@@ -76,7 +75,7 @@ function UnansweredPoll({data}) {
                             ))}
                         </div>
                     </RadioGroup>
-                    <button class="shadow-lg rounded-xl py-1 max-w-sm mx-auto px-8 mt-8 bg-blue-900" onClick={() => handleSaveAnswer(selected)}>save</button>
+                    <button className="shadow-lg rounded-xl py-1 max-w-sm mx-auto px-8 mt-8 bg-blue-900" onClick={() => handleSaveAnswer(selected)}>save</button>
                 </div>
             </div>
     </>

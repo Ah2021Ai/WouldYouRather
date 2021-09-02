@@ -16,7 +16,7 @@ export default function currentUserReducer(state = null, action) {
                 questions: state.questions.concat([id])
             }
         case "currentUser/saveCurrentUserAnswer":
-            const {authedUser , qid, answer} = action.payload
+            const { qid, answer} = action.payload
             return {
                 ...state,
                 answers:  {

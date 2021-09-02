@@ -13,6 +13,8 @@ function filterPolls(polls, currentUser) {
     const unAnswered = polls.filter((poll) =>
         !(poll.optionOne.votes.includes(currentUser.id) || poll.optionTwo.votes.includes(currentUser.id)))
     const answered = polls.filter((poll) => poll.optionOne.votes.includes(currentUser.id) || poll.optionTwo.votes.includes(currentUser.id))
+    unAnswered.sort((a, b) => b.timestamp - a.timestamp)
+    answered.sort((a, b) => b.timestamp - a.timestamp)
     const categories =  {
         "Unanswered": unAnswered,
         "Answered": answered

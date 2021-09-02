@@ -36,11 +36,9 @@ const selectedState = state => state
 function LeaderBoard() {
     const [usersScoreList, setUserScoreList] = useState([])
     const {users, polls} = useSelector(selectedState)
-    console.log("here")
     useEffect(() => {
         const usersList = Object.values(users)
         const pollsList = Object.values(polls)
-        console.log(usersList, pollsList)
         const usersScore = arrange(usersList, pollsList)
         const sortedUsersScore  = sortUsers(usersScore)
         setUserScoreList(sortedUsersScore)
@@ -48,8 +46,8 @@ function LeaderBoard() {
     
 
     return (
-        <div class=" max-w-2xl  mx-auto mt-2 ">
-            <ul class="mx-4 flex flex-col items-center space-y-4 p-2 border rounded-xl  shadow-2xl">
+        <div className=" max-w-2xl  mx-auto mt-2 ">
+            <ul className="mx-4 flex flex-col items-center space-y-4 p-2 border rounded-xl  shadow-2xl">
                 {usersScoreList.map((user, i) => 
                     <UserStandingCard key={i} rank={i + 1} user={user} />
                     )

@@ -1,5 +1,5 @@
 import { useHistory } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 const selectedState = state => state
 
 function PollView({qid}) {
@@ -20,13 +20,13 @@ function PollView({qid}) {
     }
     return (
         <>
-            <h2 class="bg-blue-900 bg-opacity-75 p-2 text-white w-full sm:rounded-t-xl">{name} asks</h2>
+            <h2 className="bg-blue-900 bg-opacity-75 p-2 text-white w-full sm:rounded-t-xl">{name} asks</h2>
             <figure className="md:flex text-white md:p-0">
                     <img className="mx-auto md:ml-4 w-24 h-24 md:w-28 md:h-auto  md:rounded-none rounded-full pb-1" src={avatarURL} alt="" width="384" height="512"/>
-                    <div class="border border-gray-300 my-2 md:mx-4 max-w-xs mx-auto md:h-36 md:my-auto"></div>
-                    <div class="text-center md:text-left space-y-0.5 my-2 mx-auto max-w-lg flex-1 ">
+                    <div className="border border-gray-300 my-2 md:mx-4 max-w-xs mx-auto md:h-36 md:my-auto"></div>
+                    <div className="text-center md:text-left space-y-0.5 my-2 mx-auto max-w-lg flex-1 ">
                         <h1>Would you rather</h1>
-                        <div class="flex flex-col items-center justify-center space-y-2 mt-4">
+                        <div className="flex flex-col items-center justify-center space-y-2 mt-4">
                             <p className="text-lg font-semibold truncate md:pt-6">
                                 ...{optionOne.text}...
                             </p>

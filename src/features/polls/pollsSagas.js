@@ -3,16 +3,19 @@ import {showLoading, hideLoading} from "react-redux-loading-bar"
 import { handleFetchProducts } from "./pollsHelpers";
 import { saveQuestion, saveQuestionAnswer } from "../../utils/api";
 
-function* fetchPolls() {
+function* fetchPolls(action) {
     yield put(showLoading())
     const polls = yield call(handleFetchProducts)
-    yield all([
+    try {yield all([
         put({
         type: 'polls/receivePolls',
         payload: {polls: polls}
         }),
         put(hideLoading())
-    ])
+    ])} catch(e) {}
+    finally {
+        action.cb()
+    }
     
 }
 

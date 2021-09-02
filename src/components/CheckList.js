@@ -2,23 +2,26 @@ import { Fragment, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 
 const selectedUsers = (state) => Object.values(state?.users)
 
-
-
 export default function CheckList() {
-    const dispatch = useDispatch()
-    const history = useHistory()
-    const users = useSelector(selectedUsers)
-    const [selected, setSelected] = useState(users[0])
+  const dispatch = useDispatch()
+  const history = useHistory()
+  const location = useLocation()
+  
+  let { from } = location.state || { from: { pathname: "/" } };
+  
+  const users = useSelector(selectedUsers)
+  const [selected, setSelected] = useState(users[0])
 
-    const handleLogin = (e) => {
-        e.preventDefault()
-        dispatch({type: "currentUser/setCurrentUser", payload: selected})
-        dispatch({type: "polls/pollsFetch"})
-        history.push("/")
+  const handleLogin = (e) => {
+      e.preventDefault()
+      dispatch({type: "currentUser/setCurrentUser", payload: {
+        selected,
+        cb: () => history.replace(from)
+      }})
     }
   return (
     <Fragment>
